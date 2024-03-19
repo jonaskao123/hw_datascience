@@ -18,14 +18,14 @@ calculate <- function(target, badthre, input, output) {
       FP <- subset(nonfiltered_data, reference == target)
       null_P <- sum(data$reference == "bad") / nrow(data)
       
-      sensitivity <- round(sum(filtered_data$reference == target) / sum(data$reference == target), 2)
-      specificity <- 1 - round(sum(filtered_data$reference != target) / sum(data$reference != target), 2)
-      precision <- round(sum(filtered_data$reference == target) / nrow(filtered_data), 2)
-      F1 <- round(2 * sensitivity * precision / (sensitivity + precision), 2)
-      logLikelihood <- round(sum(log(c(TP$pred.score, 1 - FN$pred.score, 1 - TN$pred.score, FP$pred.score))), 2)
+      sensitivity <- sum(filtered_data$reference == target) / sum(data$reference == target)
+      specificity <- 1 - sum(filtered_data$reference != target) / sum(data$reference != target)
+      precision <- sum(filtered_data$reference == target) / nrow(filtered_data)
+      F1 <- 2 * sensitivity * precision / (sensitivity + precision)
+      logLikelihood <- sum(log(c(TP$pred.score, 1 - FN$pred.score, 1 - TN$pred.score, FP$pred.score)))
       logLikelihood_null <- with(data, sum(ifelse(reference == "bad", log(null_P), log(1-null_P))))
-      pseudoR2 <- round(1 -  logLikelihood / logLikelihood_null, 2)
-      return(c(sensitivity = sensitivity, specificity = specificity, F1 = F1, logLikelihood = logLikelihood, pseudoRsquared = pseudoR2))
+      pseudoR2 <- 1 -  logLikelihood / logLikelihood_null
+      return(round(c(sensitivity = sensitivity, specificity = specificity, F1 = F1, logLikelihood = logLikelihood, pseudoRsquared = pseudoR2), 2))
     } else {
       filtered_data <- subset(data, pred.score < badthre)
       nonfiltered_data <- subset(data, pred.score >= badthre)
@@ -49,7 +49,7 @@ calculate <- function(target, badthre, input, output) {
   
   results_df <- do.call(rbind, results)
   method <- gsub("\\.csv", "", names(method_data))
-  method <- gsub("data/set1/", "", method)
+  method <- gsub("data/set[0-9]+/", "", method)
 
   results_df <- cbind(method, results_df)
   results_df <- data.frame(results_df)
