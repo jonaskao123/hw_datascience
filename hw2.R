@@ -58,7 +58,7 @@ calculate <- function(target, badthre, input, output) {
   write.csv(results_df, file = output, quote = F, row.names = F)
 }
 
-calculate("bad", 0.5, "HW2_DATA/method1.csv HW2_DATA/method2.csv", "HW2_DATA/output1.csv")
-calculate("bad", 0.4, "HW2_DATA/method1.csv HW2_DATA/method3.csv HW2_DATA/method5.csv", "HW2_DATA/output2.csv")
-calculate("good", 0.6, "HW2_DATA/method2.csv HW2_DATA/method4.csv HW2_DATA/method6.csv", "HW2_DATA/output3.csv")
+# calculate("bad", 0.5, "HW2_DATA/method1.csv HW2_DATA/method2.csv", "HW2_DATA/output1.csv")
+# calculate("bad", 0.4, "HW2_DATA/method1.csv HW2_DATA/method3.csv HW2_DATA/method5.csv", "HW2_DATA/output2.csv")
+# calculate("good", 0.6, "HW2_DATA/method2.csv HW2_DATA/method4.csv HW2_DATA/method6.csv", "HW2_DATA/output3.csv")
                     
