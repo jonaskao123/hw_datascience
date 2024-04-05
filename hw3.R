@@ -11,7 +11,7 @@ k_fold <- function(k, input_file, output_file){
   data <- preprocess(input_file)
   
   labels <- factor(data$V2)
-  features <- data[, (3:2000)] 
+  features <- data[, (3:5603)] 
   
   train_accuracy <- vector("numeric", length = k)
   val_accuracy <- vector("numeric", length = k)
@@ -25,9 +25,9 @@ k_fold <- function(k, input_file, output_file){
     val_indices <- ((i %% k) * fold_size + 1):(((i %% k) + 1) * fold_size)  
     train_indices <- setdiff(1:nrow(data), c(test_indices, val_indices))  
     
-    train_data <- data[train_indices, 3:2000]
-    val_data <- data[val_indices, 3:2000]
-    test_data <- data[test_indices, 3:2000]
+    train_data <- data[train_indices, 3:5603]
+    val_data <- data[val_indices, 3:5603]
+    test_data <- data[test_indices, 3:5603]
     
     train_labels <- labels[train_indices]
     val_labels <- labels[val_indices]
@@ -35,7 +35,7 @@ k_fold <- function(k, input_file, output_file){
     
     missing_labels <- setdiff(c("CP", "CW", "EC", "IM"), unique(train_labels))
     if (length(missing_labels) > 0) {
-      missing_data <- data[labels %in% missing_labels, 3:2000]
+      missing_data <- data[labels %in% missing_labels, 3:5603]
       missing_labels <- labels[labels %in% missing_labels]
       train_data <- rbind(train_data, missing_data)
       train_labels <- c(train_labels, missing_labels)
