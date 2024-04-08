@@ -70,4 +70,4 @@ k_fold <- function(k, input_file, output_file){
 }
 
 # Example usage:
-model <- k_fold(5, 'HW3_DATA/Archaeal_tfpssm.csv', 'HW3_DATA/performance.csv')
+# model <- k_fold(5, 'HW3_DATA/Archaeal_tfpssm.csv', 'HW3_DATA/performance.csv')
