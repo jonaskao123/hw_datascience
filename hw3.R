@@ -66,6 +66,11 @@ k_fold <- function(k, input_file, output_file){
   )
   
   write.csv(performance, file = output_file, row.names = FALSE, quote = F)
+  
+  cat('ntree:', "500\n")
+  cat('mtry:', "65\n")
+  cat('maxnodes:', 20)
+  
   return (model)
 }
 
